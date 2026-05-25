@@ -1,0 +1,22 @@
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 日志
+*.log
+npm-debug.log*
+
+# 依赖
+node_modules/
+
+# Hexo 构建输出
+public/
+.deploy*/
+_multiconfig.yml
+
+# 数据库
+db.json
+
+# 编辑器临时文件
+*.swp
+*.tmp
