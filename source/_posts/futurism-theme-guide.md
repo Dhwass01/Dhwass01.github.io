@@ -39,14 +39,14 @@ Hexo 是一个基于 Node.js 的静态博客框架，拥有丰富的主题生态
 
 ## 二、技术选型
 
-| 层面 | 选择 | 理由 |
-|------|------|------|
-| 模板引擎 | EJS | Hexo 原生支持，语法简洁 |
-| CSS 预处理 | Stylus | Hexo 主题标配，支持变量和 mixin |
-| JavaScript | Vanilla JS | 零依赖，体积小，够用 |
-| 代码高亮 | Prism.js | Hexo 7.x 内置支持 |
-| 搜索 | 命令面板 + Pagefind | 本地模糊搜索 + 构建时全文索引 |
-| 评论 | Giscus | 基于 GitHub Discussions，免费无服务器 |
+| 层面       | 选择                | 理由                                  |
+| ---------- | ------------------- | ------------------------------------- |
+| 模板引擎   | EJS                 | Hexo 原生支持，语法简洁               |
+| CSS 预处理 | Stylus              | Hexo 主题标配，支持变量和 mixin       |
+| JavaScript | Vanilla JS          | 零依赖，体积小，够用                  |
+| 代码高亮   | Prism.js            | Hexo 7.x 内置支持                     |
+| 搜索       | 命令面板 + Pagefind | 本地模糊搜索 + 构建时全文索引         |
+| 评论       | Giscus              | 基于 GitHub Discussions，免费无服务器 |
 
 ---
 
@@ -109,18 +109,18 @@ themes/futurism/
 ```css
 :root,
 [data-theme="dark"] {
-  --bg-base: #0A0B14;
-  --bg-surface: #12131F;
-  --text-primary: #F0F0F5;
-  --brand-primary: #7C5CFF;
-  --brand-accent: #00E5FF;
-  --brand-warm: #FF6B9D;
+  --bg-base: #0a0b14;
+  --bg-surface: #12131f;
+  --text-primary: #f0f0f5;
+  --brand-primary: #7c5cff;
+  --brand-accent: #00e5ff;
+  --brand-warm: #ff6b9d;
 }
 
 [data-theme="light"] {
-  --bg-base: #FAFAFE;
-  --bg-surface: #FFFFFF;
-  --text-primary: #1A1A2E;
+  --bg-base: #fafafe;
+  --bg-surface: #ffffff;
+  --text-primary: #1a1a2e;
 }
 ```
 
@@ -137,19 +137,16 @@ body
 
 ```html
 <html data-theme="dark">
-<head>
-  <%- partial('_partial/head') %>
-</head>
-<body>
-  <%- partial('_partial/header') %>
-  <%- partial('_partial/command-palette') %>
-  <main class="container">
-    <%- body %>
-  </main>
-  <%- partial('_partial/footer') %>
-  <script src="<%- url_for('js/theme-toggle.js') %>"></script>
-  <script src="<%- url_for('js/main.js') %>"></script>
-</body>
+  <head>
+    <%- partial('_partial/head') %>
+  </head>
+  <body>
+    <%- partial('_partial/header') %> <%- partial('_partial/command-palette') %>
+    <main class="container"><%- body %></main>
+    <%- partial('_partial/footer') %>
+    <script src="<%- url_for('js/theme-toggle.js') %>"></script>
+    <script src="<%- url_for('js/main.js') %>"></script>
+  </body>
 </html>
 ```
 
@@ -159,17 +156,18 @@ body
 
 ```javascript
 // theme-toggle.js
-(function() {
-  const stored = localStorage.getItem('theme');
-  const theme = stored || 'dark';
+(function () {
+  const stored = localStorage.getItem("theme");
+  const theme = stored || "dark";
   document.documentElement.dataset.theme = theme;
-  
+
   window.ThemeToggle = {
     toggle() {
-      const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+      const next =
+        document.documentElement.dataset.theme === "dark" ? "light" : "dark";
       document.documentElement.dataset.theme = next;
-      localStorage.setItem('theme', next);
-    }
+      localStorage.setItem("theme", next);
+    },
   };
 })();
 ```
@@ -201,14 +199,17 @@ function fuzzyMatch(query, text) {
 `toc-progress.js` 使用 `IntersectionObserver` 监听标题元素的可见性，自动高亮当前章节：
 
 ```javascript
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      // 高亮对应的 TOC 链接
-      highlightTocLink(entry.target.id);
-    }
-  });
-}, { rootMargin: '-20% 0px -80% 0px' });
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        // 高亮对应的 TOC 链接
+        highlightTocLink(entry.target.id);
+      }
+    });
+  },
+  { rootMargin: "-20% 0px -80% 0px" },
+);
 ```
 
 阅读进度条通过 `scroll` 事件计算百分比，使用 `requestAnimationFrame` 优化性能。
@@ -317,7 +318,7 @@ social:
 
 # Giscus 评论
 giscus:
-  enable: false  # 改为 true 启用
+  enable: false # 改为 true 启用
   repo: "your-repo"
   repoId: "your-repo-id"
 ```

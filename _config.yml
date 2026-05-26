@@ -103,4 +103,4 @@ theme: futurism
 deploy:
   type: git
   repository: https://github.com/Dhwass01/Dhwass01.github.io.git
-  branch: main
+  branch: gh-pages

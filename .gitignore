@@ -25,3 +25,8 @@ db.json
 Git学习指南.md
 Hexo博客知识手册.md
 博客搭建计划.md
+
+# 临时文件
+deploy.cmd
+test-wordcount.js
+*.txt
