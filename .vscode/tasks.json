@@ -14,6 +14,18 @@
 			"command": "npx hexo clean && npx hexo generate && npx hexo deploy",
 			"problemMatcher": [],
 			"group": "build"
+		},
+		{
+			"label": "Hexo Generate",
+			"type": "shell",
+			"command": "npx hexo generate",
+			"problemMatcher": []
+		},
+		{
+			"label": "Rebuild Hexo",
+			"type": "shell",
+			"command": "npx hexo clean && npx hexo generate",
+			"problemMatcher": []
 		}
 	]
 }

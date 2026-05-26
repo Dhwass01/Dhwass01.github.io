@@ -68,6 +68,46 @@
       </div>
       <% } %>
 
+      <!-- 相关文章推荐 -->
+      <%
+        var relatedPosts = [];
+        if (page.tags && page.tags.length) {
+          var currentTags = page.tags.map(function(t) { return t.name; });
+          site.posts.forEach(function(post) {
+            if (post.path === page.path) return;
+            if (!post.tags || !post.tags.length) return;
+            var postTags = post.tags.map(function(t) { return t.name; });
+            var matchCount = 0;
+            currentTags.forEach(function(tag) {
+              if (postTags.indexOf(tag) !== -1) matchCount++;
+            });
+            if (matchCount > 0) {
+              relatedPosts.push({ post: post, score: matchCount });
+            }
+          });
+          relatedPosts.sort(function(a, b) { return b.score - a.score; });
+          relatedPosts = relatedPosts.slice(0, 3).map(function(item) { return item.post; });
+        }
+      %>
+      <% if (relatedPosts.length > 0) { %>
+      <section class="related-posts">
+        <h2 class="related-posts__title">📖 相关推荐</h2>
+        <div class="related-posts__grid">
+          <% relatedPosts.forEach(function(post) { %>
+          <a href="<%- url_for(post.path) %>" class="related-posts__card">
+            <span class="related-posts__card-title"><%= post.title %></span>
+            <span class="related-posts__card-meta">
+              📅 <%= date(post.date, 'YYYY-MM-DD') %>
+              <% if (theme.post.reading_time) { %>
+                · ⏱ <%= min2read(post.content) %> 分钟
+              <% } %>
+            </span>
+          </a>
+          <% }) %>
+        </div>
+      </section>
+      <% } %>
+
       <!-- 版权声明 -->
       <% if (theme.post.copyright && theme.post.copyright.enable) { %>
       <div class="post-copyright">
