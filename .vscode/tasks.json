@@ -4,14 +4,14 @@
 		{
 			"label": "Hexo Build",
 			"type": "shell",
-			"command": "npx hexo clean; npx hexo generate",
+			"command": "npx hexo clean && npx hexo generate",
 			"problemMatcher": [],
 			"group": "build"
 		},
 		{
-			"label": "Hexo Clean & Generate",
+			"label": "Hexo Deploy",
 			"type": "shell",
-			"command": "npx hexo clean && npx hexo generate",
+			"command": "npx hexo clean && npx hexo generate && npx hexo deploy",
 			"problemMatcher": [],
 			"group": "build"
 		}
