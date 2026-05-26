@@ -1,0 +1,16 @@
+<div class="taxonomy container">
+  <h1 class="taxonomy__title">
+    <span class="taxonomy__icon">#</span> 所有标签
+  </h1>
+  <p class="taxonomy__count">共 <%= site.tags.length %> 个标签</p>
+
+  <section class="taxonomy-all">
+    <div class="tag-cloud">
+      <% site.tags.sort('name').forEach(function(tag) { %>
+        <a href="<%- url_for(tag.path) %>" class="tag-chip">
+          #<%= tag.name %> <span class="tag-count"><%= tag.length %></span>
+        </a>
+      <% }) %>
+    </div>
+  </section>
+</div>

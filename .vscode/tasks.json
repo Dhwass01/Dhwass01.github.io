@@ -1,0 +1,19 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Hexo Build",
+			"type": "shell",
+			"command": "npx hexo clean; npx hexo generate",
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Hexo Clean & Generate",
+			"type": "shell",
+			"command": "npx hexo clean && npx hexo generate",
+			"problemMatcher": [],
+			"group": "build"
+		}
+	]
+}
