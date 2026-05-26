@@ -5,7 +5,7 @@
 (function () {
   "use strict";
 
-  // 代码块复制功能
+  // 代码块复制功能 + 语言标签
   function initCodeCopy() {
     document.querySelectorAll("pre").forEach(function (pre) {
       // 包裹容器
@@ -13,6 +13,15 @@
       wrapper.className = "code-block-wrapper";
       pre.parentNode.insertBefore(wrapper, pre);
       wrapper.appendChild(pre);
+
+      // 语言标签
+      var langMatch = pre.className.match(/language-(\w+)/);
+      if (langMatch) {
+        var label = document.createElement("span");
+        label.className = "code-lang-label";
+        label.textContent = langMatch[1];
+        wrapper.appendChild(label);
+      }
 
       // 复制按钮
       var btn = document.createElement("button");
