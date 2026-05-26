@@ -1,0 +1,123 @@
+// ============================================
+//  Command Palette — Cmd+K 面板
+//  占位: Step 8 填充
+// ============================================
+
+.command-palette-overlay
+  position fixed
+  inset 0
+  z-index $z-modal
+  display none
+  align-items flex-start
+  justify-content center
+  padding-top 20vh
+  background var(--overlay-bg)
+  backdrop-filter blur(8px)
+  -webkit-backdrop-filter blur(8px)
+  opacity 0
+  transition opacity $transition-base
+
+  &.is-open
+    display flex
+    opacity 1
+
+.command-palette
+  width 100%
+  max-width 580px
+  background var(--bg-elevated)
+  border 1px solid var(--border-strong)
+  border-radius $radius-lg
+  box-shadow 0 24px 80px rgba(0,0,0,0.4), var(--glow-primary)
+  overflow hidden
+  transform translateY(-12px)
+  transition transform $transition-base
+
+  .is-open &
+    transform translateY(0)
+
+.command-palette__input-wrap
+  display flex
+  align-items center
+  padding $space-md $space-lg
+  border-bottom 1px solid var(--border-subtle)
+
+  .search-icon
+    color var(--text-muted)
+    margin-right $space-sm
+    flex-shrink 0
+
+  input
+    flex 1
+    background none
+    border none
+    outline none
+    font-family $font-body
+    font-size $text-base
+    color var(--text-primary)
+
+    &::placeholder
+      color var(--text-muted)
+
+.command-palette__results
+  max-height 360px
+  overflow-y auto
+  padding $space-sm
+
+.command-palette__item
+  display flex
+  align-items center
+  gap $space-md
+  padding 0.6em $space-md
+  border-radius $radius-sm
+  cursor pointer
+  color var(--text-secondary)
+  font-size $text-sm
+  transition background $transition-fast, color $transition-fast
+
+  &:hover, &.is-active
+    background var(--bg-overlay)
+    color var(--text-primary)
+
+  &.is-active
+    border-left 2px solid var(--brand-primary)
+
+  .result-title
+    flex 1
+    white-space nowrap
+    overflow hidden
+    text-overflow ellipsis
+
+  .result-type
+    font-size $text-xs
+    color var(--text-muted)
+    background var(--bg-overlay)
+    padding 0.15em 0.5em
+    border-radius $radius-sm
+
+.command-palette__empty
+  text-align center
+  padding $space-xl
+  color var(--text-muted)
+  font-size $text-sm
+
+.command-palette__footer
+  display flex
+  align-items center
+  gap $space-md
+  padding $space-sm $space-lg
+  border-top 1px solid var(--border-subtle)
+  font-size $text-xs
+  color var(--text-muted)
+
+  kbd
+    display inline-flex
+    align-items center
+    justify-content center
+    min-width 20px
+    height 20px
+    padding 0 4px
+    font-family $font-mono
+    font-size 10px
+    background var(--bg-overlay)
+    border 1px solid var(--border-subtle)
+    border-radius 3px

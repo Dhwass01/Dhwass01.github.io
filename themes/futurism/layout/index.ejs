@@ -1,0 +1,42 @@
+<!-- Hero 区 -->
+<% if (theme.hero.enable) { %>
+  <%- partial('_partial/hero') %>
+<% } %>
+
+<!-- 最新文章 -->
+<section id="post-list" class="post-list-section container">
+  <h2 class="section-title">最新文章</h2>
+
+  <div class="post-grid">
+    <% page.posts.forEach(function(post) { %>
+      <%- partial('_partial/post-card', { post: post }) %>
+    <% }) %>
+  </div>
+
+  <!-- 分页 -->
+  <% if (page.total > 1) { %>
+  <nav class="pagination" aria-label="分页">
+    <% if (page.prev) { %>
+      <a href="<%- url_for(page.prev_link) %>" class="pagination__btn pagination__prev">← 上一页</a>
+    <% } %>
+    <span class="pagination__info"><%= page.current %> / <%= page.total %></span>
+    <% if (page.next) { %>
+      <a href="<%- url_for(page.next_link) %>" class="pagination__btn pagination__next">下一页 →</a>
+    <% } %>
+  </nav>
+  <% } %>
+</section>
+
+<!-- 标签云 -->
+<% if (site.tags && site.tags.length) { %>
+<section class="tag-cloud-section container">
+  <h2 class="section-title">标签</h2>
+  <div class="tag-cloud">
+    <% site.tags.sort('name').forEach(function(tag) { %>
+      <a href="<%- url_for(tag.path) %>" class="tag-chip">
+        #<%= tag.name %> <span class="tag-count"><%= tag.length %></span>
+      </a>
+    <% }) %>
+  </div>
+</section>
+<% } %>

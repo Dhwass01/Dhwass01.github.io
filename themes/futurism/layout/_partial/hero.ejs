@@ -1,0 +1,29 @@
+<section class="hero" aria-label="首页首屏">
+  <div class="hero-content">
+
+    <p class="hero-greeting"><%= theme.hero.greeting %></p>
+
+    <h1 class="hero-tagline">
+      <span class="text-gradient"><%= theme.hero.tagline %></span>
+    </h1>
+
+    <div class="hero-cta">
+      <% if (theme.hero.cta_primary) { %>
+        <a href="<%- url_for(theme.hero.cta_primary.url) %>" class="btn btn-primary">
+          <%= theme.hero.cta_primary.text %>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      <% } %>
+      <% if (theme.hero.cta_secondary) { %>
+        <a href="<%- url_for(theme.hero.cta_secondary.url) %>" class="btn btn-secondary">
+          <%= theme.hero.cta_secondary.text %>
+        </a>
+      <% } %>
+    </div>
+
+  </div>
+
+  <div class="scroll-hint" aria-hidden="true">
+    <span>↓ 向下滚动</span>
+  </div>
+</section>

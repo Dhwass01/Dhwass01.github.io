@@ -1,0 +1,88 @@
+// ============================================
+//  TOC — 文章目录 + 阅读进度
+//  占位: Step 6 填充
+// ============================================
+
+// 阅读进度条
+.reading-progress
+  position fixed
+  top 64px
+  left 0
+  width 0%
+  height 3px
+  background linear-gradient(90deg, var(--brand-primary), var(--brand-accent))
+  z-index $z-header
+  transition width 0.1s linear
+
+// TOC 容器
+.toc-sidebar
+  position sticky
+  top 88px
+  max-height calc(100vh - 120px)
+  overflow-y auto
+  padding-right $space-lg
+
+.toc-title
+  font-family $font-display
+  font-size $text-sm
+  font-weight 600
+  color var(--text-muted)
+  text-transform uppercase
+  letter-spacing 0.08em
+  margin-bottom $space-md
+
+.toc-list
+  list-style none
+  padding 0
+  margin 0
+
+  li
+    margin-bottom 0.2em
+
+  a
+    display block
+    font-size $text-sm
+    color var(--text-muted)
+    padding 0.25em 0 0.25em 0.8em
+    border-left 2px solid transparent
+    transition color $transition-fast, border-color $transition-fast
+
+    &:hover
+      color var(--text-secondary)
+
+    &.is-active
+      color var(--brand-accent)
+      border-left-color var(--brand-accent)
+
+  // 缩进层级
+  .toc-link--h3
+    padding-left 1.6em
+    font-size $text-xs
+
+  .toc-link--h4
+    padding-left 2.4em
+    font-size $text-xs
+
+// 移动端 TOC 浮动按钮
+.toc-mobile-trigger
+  display none
+  position fixed
+  bottom $space-xl
+  right $space-xl
+  width 48px
+  height 48px
+  border-radius 50%
+  background var(--brand-primary)
+  color #fff
+  align-items center
+  justify-content center
+  box-shadow var(--glow-primary)
+  z-index $z-back-to-top
+  font-size $text-lg
+
+@media (max-width: $bp-desktop)
+  .toc-sidebar
+    display none
+
+  .toc-mobile-trigger
+    display flex

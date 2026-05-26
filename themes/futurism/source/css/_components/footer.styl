@@ -1,0 +1,87 @@
+// ============================================
+//  Footer — 页脚
+// ============================================
+
+.site-footer
+  border-top 1px solid var(--border-subtle)
+  padding $space-2xl 0
+  background var(--bg-base)
+  transition background $transition-slow
+
+.footer-inner
+  max-width $container-max-width
+  margin 0 auto
+  padding 0 $space-lg
+  text-align center
+
+// 社交链接
+.footer-social
+  display flex
+  justify-content center
+  gap $space-lg
+  margin-bottom $space-lg
+
+  a
+    display flex
+    align-items center
+    gap $space-xs
+    font-size $text-sm
+    color var(--text-muted)
+    transition color $transition-fast
+
+    &:hover
+      color var(--brand-accent)
+
+// 版权信息
+.footer-meta
+  display flex
+  justify-content center
+  flex-wrap wrap
+  gap $space-sm
+  font-size $text-xs
+  color var(--text-muted)
+
+  span:not(:last-child)::after
+    content '·'
+    margin-left $space-sm
+    color var(--border-subtle)
+
+  a
+    color var(--text-muted)
+
+    &:hover
+      color var(--brand-accent)
+
+// 回到顶部
+.back-to-top
+  position fixed
+  bottom $space-xl
+  right $space-xl
+  width 44px
+  height 44px
+  display flex
+  align-items center
+  justify-content center
+  border-radius 50%
+  background var(--bg-elevated)
+  border 1px solid var(--border-subtle)
+  color var(--text-secondary)
+  z-index $z-back-to-top
+  transition transform $transition-base, box-shadow $transition-base, opacity $transition-base
+  box-shadow 0 4px 16px rgba(0,0,0,0.15)
+
+  &:hover
+    transform translateY(-2px)
+    box-shadow var(--glow-accent)
+    color var(--brand-accent)
+
+@media (max-width: $bp-mobile)
+  .footer-social
+    gap $space-md
+
+  .footer-meta
+    flex-direction column
+    gap $space-xs
+
+    span:not(:last-child)::after
+      content none

@@ -1,0 +1,23 @@
+{
+  "name": "hexo-theme-futurism",
+  "version": "0.1.0",
+  "description": "A futuristic Hexo theme with deep-space aesthetics — tech × design.",
+  "private": true,
+  "scripts": {
+    "dev": "hexo server --theme futurism",
+    "build": "hexo generate"
+  },
+  "keywords": [
+    "hexo",
+    "theme",
+    "futurism",
+    "dark-mode",
+    "ejs",
+    "stylus"
+  ],
+  "author": "Dhwass01",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

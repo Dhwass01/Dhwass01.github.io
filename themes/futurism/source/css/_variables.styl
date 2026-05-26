@@ -1,0 +1,116 @@
+// ============================================
+//  Design Token — Futurism Theme
+// ============================================
+
+// ===== 暗色主题(默认) =====
+:root[data-theme="dark"]
+  // 背景层
+  --bg-base          #0A0B14
+  --bg-elevated      #12141F
+  --bg-overlay       #1A1D2E
+
+  // 文字层
+  --text-primary     #F5F7FF
+  --text-secondary   #A8AECB
+  --text-muted       #5A6080
+
+  // 品牌色
+  --brand-primary    #7C5CFF
+  --brand-accent     #00E5FF
+  --brand-warm       #FF6B9D
+
+  // 边框 + 辉光
+  --border-subtle    rgba(255,255,255,0.06)
+  --border-strong    rgba(124,92,255,0.25)
+  --glow-primary     0 0 24px rgba(124,92,255,0.35)
+  --glow-accent      0 0 32px rgba(0,229,255,0.30)
+
+  // 代码块
+  --code-bg          #0D0F1A
+  --code-line-number #3A3F5A
+
+  // 滚动条
+  --scrollbar-thumb  rgba(124,92,255,0.3)
+  --scrollbar-track  rgba(10,11,20,0.5)
+
+  // 遮罩
+  --overlay-bg       rgba(5,6,14,0.80)
+
+// ===== 浅色主题 =====
+:root[data-theme="light"]
+  --bg-base          #FAFBFF
+  --bg-elevated      #FFFFFF
+  --bg-overlay       #F0F2FA
+
+  --text-primary     #0A0B14
+  --text-secondary   #4A5070
+  --text-muted       #8B92B0
+
+  --brand-primary    #6344FF
+  --brand-accent     #0099B8
+  --brand-warm       #E84F87
+
+  --border-subtle    rgba(0,0,0,0.06)
+  --border-strong    rgba(99,68,255,0.20)
+  --glow-primary     0 0 20px rgba(99,68,255,0.15)
+  --glow-accent      0 0 24px rgba(0,153,184,0.15)
+
+  --code-bg          #F4F5FA
+  --code-line-number #B0B5CC
+
+  --scrollbar-thumb  rgba(99,68,255,0.25)
+  --scrollbar-track  rgba(0,0,0,0.04)
+
+  --overlay-bg       rgba(250,251,255,0.85)
+
+// ===== 字体栈 (Stylus 变量, 供组件引用) =====
+$font-display = 'Geist', 'PingFang SC', system-ui, sans-serif
+$font-body    = 'Inter', 'PingFang SC', system-ui, sans-serif
+$font-mono    = 'JetBrains Mono', 'Geist Mono', monospace
+
+// ===== 字号 =====
+$text-xs   = 0.75rem    // 12px
+$text-sm   = 0.875rem   // 14px
+$text-base = 1rem       // 16px
+$text-lg   = 1.25rem    // 20px
+$text-xl   = 1.563rem   // 25px
+$text-2xl  = 1.953rem   // 31px
+$text-3xl  = 2.441rem   // 39px
+$text-4xl  = 3.052rem   // 49px
+
+// ===== 圆角 =====
+$radius-sm = 6px
+$radius-md = 12px
+$radius-lg = 20px
+
+// ===== 内容宽度 =====
+$prose-max-width = 720px
+$container-max-width = 1200px
+$sidebar-width = 260px
+
+// ===== 间距 =====
+$space-xs  = 0.25rem
+$space-sm  = 0.5rem
+$space-md  = 1rem
+$space-lg  = 1.5rem
+$space-xl  = 2rem
+$space-2xl = 3rem
+$space-3xl = 4rem
+
+// ===== 过渡 =====
+$transition-fast   = 0.15s ease
+$transition-base   = 0.25s ease
+$transition-slow   = 0.4s ease
+
+// ===== 断点 =====
+$bp-mobile  = 640px
+$bp-tablet  = 768px
+$bp-desktop = 1024px
+$bp-wide    = 1280px
+
+// ===== Z-index 层级 =====
+$z-header     = 100
+$z-overlay    = 200
+$z-modal      = 300
+$z-toast      = 400
+$z-back-to-top = 90

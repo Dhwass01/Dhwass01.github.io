@@ -641,7 +641,321 @@ git push
 
 ---
 
-## 💡 常见问题
+## � 第十一章：实战踩坑记录（真实案例）
+
+> 本章记录了搭建博客过程中**真实遇到的所有 Git 问题**，每个问题都包含：症状、原因分析、解决方案、以及对应的知识点。这些是最宝贵的学习素材——因为它们都是你会真正遇到的。
+
+---
+
+### 11.1 问题一：`hexo` 命令提示"CommandNotFoundException"
+
+#### 症状
+
+```powershell
+hexo server
+# hexo: The term 'hexo' is not recognized as a name of a cmdlet...
+```
+
+#### 原因分析
+
+Hexo 是通过 `npm install` 安装在项目的 `node_modules/` 目录中的（**本地安装**），而不是通过 `npm install -g hexo-cli` 安装到系统全局的。本地安装的包不会注册为系统命令。
+
+#### 解决方案
+
+使用 `npx` 前缀来调用本地安装的包：
+
+```powershell
+npx hexo server      # 启动本地预览
+npx hexo generate     # 生成静态文件
+npx hexo deploy       # 部署到 GitHub Pages
+npx hexo clean        # 清理缓存
+```
+
+#### 💡 Git 知识点
+
+- **本地安装 vs 全局安装**：`npm install hexo` 安装到 `node_modules/`（项目内），`npm install -g hexo` 安装到系统路径
+- 这就是为什么 `.gitignore` 要忽略 `node_modules/`——它是依赖文件夹，别人可以通过 `npm install` 重新生成
+- 类比 Git：`node_modules/` 就像 `public/` 一样，是**可再生的产物**，不需要版本控制
+
+---
+
+### 11.2 问题二：`git push` 提示 "Invalid username or token"
+
+#### 症状
+
+```powershell
+git push -u origin main
+# fatal: Invalid username or token.
+# fatal: Authentication failed for 'https://github.com/...'
+```
+
+#### 原因分析
+
+GitHub 在 2021 年 8 月后**不再接受密码认证**，HTTPS 推送必须使用 **Personal Access Token (PAT)** 作为凭据。
+
+#### 解决方案
+
+1. 在 GitHub 生成 PAT：`Settings → Developer settings → Personal access tokens → Generate new token`
+2. 将 token 嵌入远程 URL：
+
+```powershell
+git remote set-url origin https://<TOKEN>@github.com/用户名/仓库名.git
+```
+
+#### 💡 Git 知识点
+
+- **HTTPS vs SSH**：Git 推送有两种认证方式
+  - **HTTPS**：用 token 认证，适合初学者
+  - **SSH**：用密钥对认证，更安全，适合长期使用
+- `git remote set-url` 可以修改远程仓库的地址
+- **安全警告**：token 等同于密码，不要提交到代码中或分享给他人
+
+---
+
+### 11.3 问题三：Windows Git Credential Manager (GCM) 拦截认证
+
+#### 症状
+
+即使已经在 URL 中嵌入了 token，`git push` 时仍然弹出浏览器登录窗口，或者提示认证失败。
+
+#### 原因分析
+
+Windows 系统安装了 **Git Credential Manager (GCM)**，它会拦截所有 HTTPS 认证请求，用自己管理的凭据替代 URL 中嵌入的 token。可以用以下命令查看：
+
+```powershell
+git config --global credential.helper
+# 输出：manager   ← 这就是 GCM
+```
+
+#### 解决方案
+
+**临时禁用 GCM → 推送 → 恢复 GCM**：
+
+```powershell
+# 第一步：禁用 GCM
+git config --global credential.helper ""
+
+# 第二步：推送（URL 中已有 token，不需要密码）
+git push -u origin main
+
+# 第三步：恢复 GCM（日常使用时保留它更方便）
+git config --global credential.helper manager
+```
+
+#### 💡 Git 知识点
+
+- **credential.helper** 是 Git 的凭据管理机制，可以配置为不同的后端
+  - `manager`：Windows Git Credential Manager，图形化管理
+  - `store`：明文保存到文件
+  - `""`（空）：不使用任何凭据助手
+- GCM 的好处是记住密码不用每次输入，坏处是有时会"自作主张"
+- 排查认证问题时，先检查 `git config --global credential.helper`
+
+---
+
+### 11.4 问题四：PowerShell 中使用 `cmd /c` 报错
+
+#### 症状
+
+```powershell
+cmd /c "git status"
+# cmd: The term 'cmd' is not recognized as a name of a cmdlet...
+```
+
+#### 原因分析
+
+VS Code 集成终端默认使用 **PowerShell**，而 `cmd /c` 是 Windows CMD 的语法。PowerShell 中直接运行 `cmd` 可能在某些环境下报错。
+
+#### 解决方案
+
+在 PowerShell 环境中，**直接使用原生命令**，无需 `cmd /c` 包裹：
+
+```powershell
+# ❌ 错误写法
+cmd /c "git status"
+
+# ✅ 正确写法
+git status
+```
+
+#### 💡 知识点
+
+- Windows 有多种命令行环境：**CMD**、**PowerShell**、**Git Bash**
+- PowerShell 是更现代的 shell，语法和 CMD 有区别
+- 通过终端提示符可以区分：`>` 是 CMD，`PS>` 是 PowerShell
+
+---
+
+### 11.5 问题五：Git 终端输出"看不到结果"
+
+#### 症状
+
+运行 `git push`、`git fetch` 等命令后，终端没有任何输出，无法判断是否成功。
+
+#### 原因分析
+
+Git 的很多信息（进度、错误）输出到 **stderr**（标准错误流），而不是 **stdout**（标准输出流）。某些终端环境不显示 stderr 的内容。
+
+#### 解决方案
+
+将 stderr 重定向到 stdout，再输出到文件查看：
+
+```powershell
+git push -u origin main 2>&1 | Out-File -FilePath result.txt -Encoding utf8
+```
+
+然后用 `read_file` 或 `type result.txt` 查看结果。
+
+#### 💡 Git 知识点
+
+- **stdout vs stderr**：程序有两个输出流
+  - `stdout`（标准输出）：正常结果
+  - `stderr`（标准错误）：错误信息、警告、进度
+- `2>&1` 是重定向语法：把 stderr（2）合并到 stdout（1）
+- `|` 管道符：把前一个命令的输出传给后一个命令
+
+---
+
+### 11.6 问题六：推送被拒绝 — "fetch first"（远程分支冲突）
+
+#### 症状
+
+```powershell
+git push -u origin main
+# ! [rejected]        main -> main (fetch first)
+# error: failed to push some refs to 'https://github.com/...'
+# hint: Updates were rejected because the remote contains work that you do not have locally.
+```
+
+#### 原因分析
+
+GitHub 远程仓库已经有提交（例如 Hexo 自动部署的旧提交），而本地仓库是一个全新的 `git init`，两边的提交历史**完全不同**，Git 不允许直接覆盖。
+
+#### 解决方案
+
+对于个人仓库，使用 **强制推送**覆盖远程：
+
+```powershell
+# 先查看远程有什么
+git fetch origin
+
+# 强制推送（覆盖远程的所有内容）
+git push --force -u origin main
+```
+
+#### ⚠️ 重要警告
+
+- `--force` 会**永久覆盖**远程仓库的内容，只在确定要替换远程时使用
+- **永远不要对团队共享的仓库使用 force push**，会覆盖别人的工作
+- 对于个人仓库（如博客），force push 是安全的
+
+#### 💡 Git 知识点
+
+- **本地仓库 vs 远程仓库**：两个仓库的提交历史是独立的
+- `git fetch`：下载远程的提交记录，但不合并
+- `git pull` = `git fetch` + `git merge`
+- `git push --force`：强制覆盖远程，不检查是否冲突
+- 遇到 "fetch first" 时的决策树：
+  ```
+  推送被拒绝
+  ├── 远程有你需要的提交？→ git pull（合并后再推送）
+  └── 远程的内容不需要？→ git push --force（强制覆盖）
+  ```
+
+---
+
+### 11.7 问题七：GCM 弹出浏览器登录窗口
+
+#### 症状
+
+运行 `git push` 时，系统自动打开浏览器要求 GitHub 登录，而不是在终端中输入凭据。
+
+#### 原因分析
+
+Git Credential Manager 的默认行为是弹出浏览器进行 OAuth 认证。当它检测到 HTTPS 推送请求但没有已保存的凭据时，会尝试用浏览器交互方式登录。
+
+#### 解决方案
+
+设置环境变量禁止交互式提示：
+
+```powershell
+# 设置环境变量（当前会话有效）
+$env:GIT_TERMINAL_PROMPT = "0"
+
+# 然后再推送
+git push -u origin main
+```
+
+#### 💡 Git 知识点
+
+- `GIT_TERMINAL_PROMPT` 环境变量控制 Git 是否允许交互式提示
+  - `"1"`（默认）：允许弹出提示
+  - `"0"`：禁止交互式提示，没有凭据直接报错
+- 在 CI/CD 自动化环境中，通常设置为 `"0"` 防止脚本卡住
+
+---
+
+### 11.8 问题八：TLS 证书警告
+
+#### 症状
+
+```powershell
+git push
+# warning: SSL certificate problem: unable to get local issuer certificate
+```
+
+#### 原因分析
+
+系统的 SSL/TLS 证书配置有问题，Git 无法验证 GitHub 服务器的证书。
+
+#### 解决方案
+
+这通常只是一个**警告**，不影响操作。如果确实被阻止，可以临时关闭验证：
+
+```powershell
+# 仅对当前仓库关闭（推荐）
+git config http.sslVerify false
+
+# 全局关闭（不推荐，降低安全性）
+git config --global http.sslVerify false
+```
+
+#### 💡 Git 知识点
+
+- HTTPS 连接需要验证服务器的 SSL 证书，确保连接的是真正的服务器
+- 关闭证书验证 = 不验证对方身份，存在中间人攻击风险
+- 正确做法是更新系统的 CA 证书库，而不是关闭验证
+
+---
+
+### 11.9 实战问题速查表
+
+| #   | 问题            | 原因                 | 一句话解决                     |
+| --- | --------------- | -------------------- | ------------------------------ |
+| 1   | hexo 命令找不到 | 本地安装，非全局     | 用 `npx hexo`                  |
+| 2   | push 认证失败   | GitHub 需要 token    | 嵌入 PAT 到 URL                |
+| 3   | GCM 拦截认证    | Windows GCM 覆盖凭据 | `credential.helper ""`         |
+| 4   | cmd /c 报错     | PowerShell 不兼容    | 直接用原生命令                 |
+| 5   | 终端看不到输出  | stderr 未捕获        | `2>&1` 重定向                  |
+| 6   | push 被拒绝     | 远程有旧提交         | `git push --force`             |
+| 7   | 浏览器弹窗登录  | GCM 交互式认证       | `$env:GIT_TERMINAL_PROMPT="0"` |
+| 8   | TLS 证书警告    | 证书配置问题         | 通常可忽略                     |
+
+---
+
+### 11.10 本章核心教训
+
+> **教训一**：环境差异是最大的坑——同样的命令在 Linux/Mac 上正常，在 Windows + PowerShell 上可能报错。
+>
+> **教训二**：认证问题是 Git 初学者最常见的障碍——理解 token、SSH key、credential helper 三者的关系至关重要。
+>
+> **教训三**：`git push --force` 不是"错误操作"，在个人仓库场景下是正常的工具。关键是理解它**什么时候安全**。
+>
+> **教训四**：看不懂的报错信息？用 `2>&1` 把所有输出都抓下来，然后慢慢分析。
+
+---
+
+## �💡 常见问题
 
 ### Q1: push 时提示输入用户名密码？
 

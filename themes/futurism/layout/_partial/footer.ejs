@@ -1,0 +1,67 @@
+<footer id="footer" class="site-footer">
+  <div class="footer-inner">
+
+    <!-- 社交链接 -->
+    <% if (theme.social && Object.keys(theme.social).length) { %>
+    <nav class="footer-social" aria-label="社交链接">
+      <% for (var name in theme.social) { %>
+      <a href="<%= theme.social[name] %>"
+         target="_blank"
+         rel="noopener noreferrer"
+         aria-label="<%= name %>"
+         title="<%= name %>">
+        <span class="social-icon social-icon--<%= name.toLowerCase() %>"><%= name %></span>
+      </a>
+      <% } %>
+    </nav>
+    <% } %>
+
+    <!-- 版权 + 信息 -->
+    <div class="footer-meta">
+      <% if (theme.footer.copyright) { %>
+      <span class="footer-copyright"><%= theme.footer.copyright %></span>
+      <% } %>
+
+      <% if (theme.footer.powered_by) { %>
+      <span class="footer-powered">
+        Powered by <a href="https://hexo.io/" target="_blank" rel="noopener noreferrer">Hexo</a>
+      </span>
+      <% } %>
+
+      <% if (theme.footer.theme_credit) { %>
+      <span class="footer-theme">
+        Theme: <a href="#">Futurism</a>
+      </span>
+      <% } %>
+    </div>
+
+  </div>
+
+  <!-- 回到顶部 -->
+  <% if (theme.back_to_top) { %>
+  <button id="back-to-top"
+          class="back-to-top"
+          aria-label="回到顶部"
+          title="回到顶部"
+          style="display:none;">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
+  </button>
+  <% } %>
+</footer>
+
+<% if (theme.back_to_top) { %>
+<script>
+  (function() {
+    var btn = document.getElementById('back-to-top');
+    if (!btn) return;
+    window.addEventListener('scroll', function() {
+      btn.style.display = window.scrollY > 400 ? 'flex' : 'none';
+    });
+    btn.addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+</script>
+<% } %>

@@ -1,0 +1,145 @@
+// ============================================
+//  Post — 文章详情页
+// ============================================
+
+.post
+  padding-top $space-xl
+  padding-bottom $space-3xl
+
+// 三栏布局: TOC | 正文
+.post-layout
+  display grid
+  grid-template-columns $sidebar-width 1fr
+  gap $space-2xl
+  max-width $container-max-width
+  margin 0 auto
+
+  @media (max-width: $bp-desktop)
+    grid-template-columns 1fr
+
+// 文章头部
+.post-header
+  margin-bottom $space-2xl
+
+  &__title
+    font-family $font-display
+    font-size $text-3xl
+    font-weight 800
+    line-height 1.2
+    margin-top 0
+    margin-bottom $space-md
+    border-bottom none
+
+    @media (max-width: $bp-mobile)
+      font-size $text-2xl
+
+  &__meta
+    display flex
+    flex-wrap wrap
+    gap $space-md
+    font-size $text-sm
+    color var(--text-muted)
+    margin-bottom $space-md
+
+  &__categories
+    margin-bottom $space-md
+
+  &__cover
+    margin-top $space-lg
+    border-radius $radius-lg
+    overflow hidden
+    border 1px solid var(--border-subtle)
+
+    img
+      width 100%
+      aspect-ratio 2 / 1
+      object-fit cover
+
+.post-category-chip
+  display inline-block
+  font-size $text-xs
+  font-weight 600
+  color var(--brand-accent)
+  background rgba(0, 229, 255, 0.08)
+  padding 0.25em 0.7em
+  border-radius $radius-lg
+  margin-right $space-xs
+  transition all $transition-fast
+
+  &:hover
+    background rgba(0, 229, 255, 0.15)
+
+// 文章正文
+.post-body
+  min-width 0  // 防止 grid 子项溢出
+
+// 文章标签
+.post-tags
+  display flex
+  flex-wrap wrap
+  gap $space-sm
+  margin-top $space-2xl
+  padding-top $space-lg
+  border-top 1px solid var(--border-subtle)
+
+// 版权声明
+.post-copyright
+  margin-top $space-lg
+  padding $space-md $space-lg
+  background var(--bg-overlay)
+  border-left 3px solid var(--brand-primary)
+  border-radius 0 $radius-sm $radius-sm 0
+  font-size $text-sm
+  color var(--text-muted)
+
+  p
+    margin 0
+
+// 上下篇导航
+.post-nav
+  display grid
+  grid-template-columns 1fr 1fr
+  gap $space-md
+  margin-top $space-2xl
+  padding-top $space-xl
+  border-top 1px solid var(--border-subtle)
+
+  &__item
+    display flex
+    flex-direction column
+    gap $space-xs
+    padding $space-md
+    border 1px solid var(--border-subtle)
+    border-radius $radius-md
+    transition all $transition-base
+
+    &:hover
+      border-color var(--brand-primary)
+      box-shadow var(--glow-primary)
+
+  &__next
+    text-align right
+
+  &__label
+    font-size $text-xs
+    color var(--text-muted)
+    text-transform uppercase
+    letter-spacing 0.05em
+
+  &__title
+    font-size $text-sm
+    font-weight 600
+    color var(--text-primary)
+    display -webkit-box
+    -webkit-line-clamp 2
+    -webkit-box-orient vertical
+    overflow hidden
+
+  @media (max-width: $bp-mobile)
+    grid-template-columns 1fr
+
+// 评论区
+.post-comments
+  margin-top $space-2xl
+  padding-top $space-xl
+  border-top 1px solid var(--border-subtle)

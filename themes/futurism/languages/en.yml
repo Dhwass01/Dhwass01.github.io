@@ -1,0 +1,43 @@
+nav:
+  Home: Home
+  Archives: Archives
+  Tags: Tags
+  Categories: Categories
+  About: About
+  Projects: Projects
+
+post:
+  published: Published on
+  updated: Updated on
+  word_count: words
+  reading_time: min read
+  toc: Table of Contents
+  prev_post: Previous
+  next_post: Next
+  copyright: Copyright
+  share: Share
+
+search:
+  placeholder: Search posts, pages, tags…
+  no_results: No results found
+  navigate: Navigate
+  open: Open
+  close: Close
+
+archive:
+  title: Archives
+  total: "%d posts in total"
+
+tag:
+  title: "Tag: %s"
+  all_tags: All Tags
+
+category:
+  title: "Category: %s"
+  all_categories: All Categories
+
+common:
+  back_to_top: Back to Top
+  scroll_down: Scroll Down
+  powered_by: "Powered by %s"
+  theme: Theme

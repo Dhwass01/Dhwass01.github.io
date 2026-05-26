@@ -1,0 +1,132 @@
+// ============================================
+//  Archive + Taxonomy
+// ============================================
+
+// 归档页
+.archive
+  padding $space-3xl 0
+
+  &__title
+    font-family $font-display
+    font-size $text-3xl
+    font-weight 800
+    margin-top 0
+    margin-bottom $space-sm
+    border-bottom none
+
+  &__count
+    font-size $text-sm
+    color var(--text-muted)
+    margin-bottom $space-2xl
+
+.archive-year
+  margin-bottom $space-2xl
+
+  &__title
+    font-family $font-display
+    font-size $text-xl
+    font-weight 700
+    color var(--brand-primary)
+    margin-top 0
+    margin-bottom $space-md
+    border-bottom 2px solid var(--border-subtle)
+    padding-bottom $space-sm
+
+  &__list
+    list-style none
+    padding 0
+    margin 0
+
+.archive-item
+  display flex
+  align-items center
+  gap $space-md
+  padding 0.6em 0
+  border-bottom 1px solid var(--border-subtle)
+  transition background $transition-fast
+
+  &:hover
+    background var(--bg-overlay)
+
+  &__date
+    font-family $font-mono
+    font-size $text-sm
+    color var(--text-muted)
+    flex-shrink 0
+    width 50px
+
+  &__title
+    flex 1
+    font-size $text-base
+    color var(--text-primary)
+    font-weight 500
+    white-space nowrap
+    overflow hidden
+    text-overflow ellipsis
+
+    &:hover
+      color var(--brand-accent)
+
+  &__cat
+    font-size $text-xs
+    color var(--text-muted)
+    flex-shrink 0
+
+    a
+      color var(--text-muted)
+      &:hover
+        color var(--brand-accent)
+
+// 标签/分类页
+.taxonomy
+  padding $space-3xl 0
+
+  &__title
+    font-family $font-display
+    font-size $text-2xl
+    font-weight 700
+    margin-top 0
+    margin-bottom $space-sm
+    border-bottom none
+    display flex
+    align-items center
+    gap $space-sm
+
+  &__icon
+    color var(--brand-primary)
+
+  &__count
+    font-size $text-sm
+    color var(--text-muted)
+    margin-bottom $space-2xl
+
+.taxonomy-all
+  margin-top $space-3xl
+  padding-top $space-xl
+  border-top 1px solid var(--border-subtle)
+
+.tag-chip--active
+  color var(--brand-accent) !important
+  border-color var(--brand-accent) !important
+  background rgba(0, 229, 255, 0.12) !important
+
+// 独立页面
+.page
+  padding $space-3xl 0
+  max-width $prose-max-width
+  margin 0 auto
+
+.page-header
+  margin-bottom $space-2xl
+
+  &__title
+    font-family $font-display
+    font-size $text-3xl
+    font-weight 800
+    margin-top 0
+    margin-bottom $space-sm
+    border-bottom none
+
+  &__subtitle
+    font-size $text-lg
+    color var(--text-secondary)

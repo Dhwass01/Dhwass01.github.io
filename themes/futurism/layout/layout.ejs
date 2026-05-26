@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="<%= config.language || 'zh-CN' %>" data-theme="<%= theme.appearance.default_theme || 'dark' %>">
+<head>
+  <%- partial('_partial/head') %>
+</head>
+<body>
+  <%- partial('_partial/header') %>
+
+  <!-- 命令面板 -->
+  <% if (theme.command_palette && theme.command_palette.enable) { %>
+    <%- partial('_partial/command-palette') %>
+  <% } %>
+
+  <main id="content" class="site-main">
+    <%- body %>
+  </main>
+
+  <%- partial('_partial/footer') %>
+
+  <!-- 主题切换 (最先加载, 防止闪烁) -->
+  <script src="<%- url_for('js/theme-toggle.js') %>"></script>
+  <!-- 主入口 -->
+  <script src="<%- url_for('js/main.js') %>"></script>
+  <!-- 命令面板 -->
+  <% if (theme.command_palette && theme.command_palette.enable) { %>
+  <script src="<%- url_for('js/command-palette.js') %>"></script>
+  <% } %>
+  <!-- TOC + 阅读进度 (仅文章页) -->
+  <% if (is_post() && theme.post.toc) { %>
+  <script src="<%- url_for('js/toc-progress.js') %>"></script>
+  <% } %>
+</body>
+</html>

@@ -1,0 +1,85 @@
+// ============================================
+//  Index — 首页分区样式
+// ============================================
+
+// 通用分区标题
+.section-title
+  font-family $font-display
+  font-size $text-2xl
+  font-weight 700
+  color var(--text-primary)
+  margin-bottom $space-xl
+  position relative
+
+  &::after
+    content ''
+    display block
+    width 48px
+    height 3px
+    background linear-gradient(90deg, var(--brand-primary), var(--brand-accent))
+    margin-top $space-sm
+    border-radius 2px
+
+// 文章列表区
+.post-list-section
+  padding $space-3xl 0
+
+// 分页
+.pagination
+  display flex
+  align-items center
+  justify-content center
+  gap $space-lg
+  margin-top $space-3xl
+
+  &__btn
+    display inline-flex
+    align-items center
+    padding 0.5em 1.2em
+    font-size $text-sm
+    font-weight 500
+    color var(--text-secondary)
+    border 1px solid var(--border-subtle)
+    border-radius $radius-md
+    transition all $transition-base
+
+    &:hover
+      color var(--text-primary)
+      border-color var(--brand-primary)
+      box-shadow var(--glow-primary)
+
+  &__info
+    font-size $text-sm
+    color var(--text-muted)
+    font-family $font-mono
+
+// 标签云
+.tag-cloud-section
+  padding $space-2xl 0 $space-3xl
+
+.tag-cloud
+  display flex
+  flex-wrap wrap
+  gap $space-sm
+
+.tag-chip
+  display inline-flex
+  align-items center
+  gap 4px
+  padding 0.35em 0.8em
+  font-size $text-sm
+  color var(--text-secondary)
+  background var(--bg-overlay)
+  border 1px solid var(--border-subtle)
+  border-radius $radius-lg
+  transition all $transition-base
+
+  &:hover
+    color var(--brand-accent)
+    border-color var(--brand-accent)
+    background rgba(0, 229, 255, 0.08)
+
+  .tag-count
+    font-size $text-xs
+    color var(--text-muted)
+    margin-left 2px

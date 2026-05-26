@@ -1,0 +1,43 @@
+nav:
+  Home: 首页
+  Archives: 归档
+  Tags: 标签
+  Categories: 分类
+  About: 关于
+  Projects: 项目
+
+post:
+  published: 发布于
+  updated: 更新于
+  word_count: 字
+  reading_time: 分钟阅读
+  toc: 目录
+  prev_post: 上一篇
+  next_post: 下一篇
+  copyright: 版权声明
+  share: 分享
+
+search:
+  placeholder: 搜索文章、页面、标签…
+  no_results: 没有找到相关结果
+  navigate: 导航
+  open: 打开
+  close: 关闭
+
+archive:
+  title: 归档
+  total: 共 %d 篇文章
+
+tag:
+  title: "标签：%s"
+  all_tags: 所有标签
+
+category:
+  title: "分类：%s"
+  all_categories: 所有分类
+
+common:
+  back_to_top: 回到顶部
+  scroll_down: 向下滚动
+  powered_by: 由 %s 驱动
+  theme: 主题

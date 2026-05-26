@@ -1,0 +1,114 @@
+# ============================================
+#  hexo-theme-futurism  ·  主题配置
+# ============================================
+
+# ---------- 站点信息 ----------
+site:
+  logo: "" # Logo 图片路径，留空则显示文字
+  title: "Futurism" # 导航栏站点名称
+  subtitle: "构建 × 创造 × 探索" # Hero 区副标题
+  description: "技术与设计的交汇点" # SEO meta description
+
+# ---------- 导航菜单 ----------
+nav:
+  Home: /
+  Archives: /archives
+  Tags: /tags
+  About: /about
+  Projects: /projects
+
+# ---------- 社交链接 ----------
+social:
+  GitHub: https://github.com/Dhwass01
+  # Twitter: https://x.com/your-handle
+  # Email: mailto:you@example.com
+  RSS: /atom.xml
+
+# ---------- Hero 区 ----------
+hero:
+  enable: true
+  greeting: "Hi, I'm Dhwass01 👋" # 问候语
+  tagline: "构建 × 创造 × 探索" # 主标语
+  cta_primary:
+    text: "阅读博客"
+    url: "#post-list"
+  cta_secondary:
+    text: "关于我"
+    url: /about
+  # 背景模式：'gradient' (纯CSS) | 'webgl' (P2)
+  background: gradient
+
+# ---------- 文章设置 ----------
+post:
+  toc: true # 默认显示目录
+  toc_depth: 3 # 目录深度 (2 = h2-h3, 3 = h2-h4)
+  reading_time: true # 显示阅读时长
+  word_count: true # 显示字数
+  copyright:
+    enable: true
+    author: "Dhwass01"
+    link: https://dhwass01.github.io
+
+# ---------- 代码高亮 ----------
+code_highlight: prism # prism | shiki
+prism:
+  line_number: true
+  copy_button: true # 一键复制
+  filename_label: true # 文件名标签
+
+# ---------- 评论 (Giscus) ----------
+comments:
+  enable: false # 启用后填写下方配置
+  provider: giscus
+giscus:
+  repo: "" # Dhwass01/your-repo
+  repo_id: ""
+  category: ""
+  category_id: ""
+  mapping: pathname
+  reactions_enabled: 1
+  emit_metadata: 0
+  theme: dark # 随主题切换自动更新
+  lang: zh-CN
+
+# ---------- 搜索 ----------
+search:
+  enable: true
+  provider: searchdb # searchdb | pagefind
+  # Pagefind 需在构建后运行 npx pagefind --site public
+
+# ---------- RSS ----------
+rss: /atom.xml
+
+# ---------- SEO ----------
+seo:
+  sitemap: true
+  og_image: /images/og-default.jpg # 默认 OG 图
+
+# ---------- 主题外观 ----------
+appearance:
+  default_theme: dark # dark | light
+  font:
+    display: "'Geist', 'PingFang SC', system-ui, sans-serif"
+    body: "'Inter', 'PingFang SC', system-ui, sans-serif"
+    mono: "'JetBrains Mono', 'Geist Mono', monospace"
+    # Google Fonts URL (Inter + JetBrains Mono)
+    cdn: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    # Geist 字体 (unpkg CDN)
+    geist_cdn: "https://unpkg.com/geist@1.4.1/dist/fonts/geist-sans/style.css"
+    geist_mono_cdn: "https://unpkg.com/geist@1.4.1/dist/fonts/geist-mono/style.css"
+
+# ---------- 命令面板 ----------
+command_palette:
+  enable: true
+  shortcut: "mod+k" # Cmd+K / Ctrl+K
+
+# ---------- 页脚 ----------
+footer:
+  copyright: "© 2026 Dhwass01"
+  powered_by: true # "Powered by Hexo"
+  theme_credit: true # "Theme: Futurism"
+
+# ---------- 页面底部 ----------
+post_pagination: true # 上一篇 / 下一篇
+back_to_top: true # 回到顶部按钮

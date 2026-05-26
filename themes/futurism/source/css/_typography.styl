@@ -1,0 +1,205 @@
+// ============================================
+//  Typography System
+// ============================================
+
+// ----- 标题 -----
+h1, h2, h3, h4, h5, h6
+  font-family $font-display
+  font-weight 700
+  line-height 1.25
+  color var(--text-primary)
+  margin-top 2em
+  margin-bottom 0.6em
+
+  // 锚点链接
+  &:hover .heading-anchor
+    opacity 1
+
+h1
+  font-size $text-3xl
+  letter-spacing -0.02em
+
+  @media (max-width: $bp-mobile)
+    font-size $text-2xl
+
+h2
+  font-size $text-2xl
+  letter-spacing -0.015em
+  padding-bottom 0.3em
+  border-bottom 1px solid var(--border-subtle)
+
+h3
+  font-size $text-xl
+
+h4
+  font-size $text-lg
+
+h5
+  font-size $text-base
+
+h6
+  font-size $text-sm
+  color var(--text-secondary)
+
+// ----- 标题锚点 -----
+.heading-anchor
+  opacity 0
+  margin-left 0.3em
+  color var(--brand-accent)
+  font-weight 400
+  transition opacity $transition-fast
+  text-decoration none
+
+// ----- 段落 -----
+p
+  margin-bottom 1.2em
+  color var(--text-secondary)
+
+// ----- 强调 -----
+strong, b
+  font-weight 600
+  color var(--text-primary)
+
+em, i
+  font-style italic
+
+// ----- 引用块 -----
+blockquote
+  margin 1.5em 0
+  padding 0.8em 1.2em
+  border-left 3px solid var(--brand-primary)
+  background var(--bg-overlay)
+  border-radius 0 $radius-sm $radius-sm 0
+  color var(--text-secondary)
+  font-style italic
+
+  p:last-child
+    margin-bottom 0
+
+  cite
+    display block
+    margin-top 0.5em
+    font-size $text-sm
+    color var(--text-muted)
+
+    &::before
+      content '— '
+
+// ----- 列表 -----
+ul, ol
+  margin-bottom 1.2em
+  color var(--text-secondary)
+
+li
+  margin-bottom 0.3em
+  line-height 1.7
+
+  &::marker
+    color var(--brand-primary)
+
+// 嵌套列表
+li > ul, li > ol
+  margin-top 0.3em
+  margin-bottom 0
+
+// ----- 行内代码 -----
+code
+  font-family $font-mono
+  font-size 0.875em
+  padding 0.15em 0.4em
+  background var(--bg-overlay)
+  border-radius $radius-sm
+  color var(--brand-accent)
+  word-break break-word
+
+// ----- 代码块 (Prism 覆盖) -----
+pre
+  font-family $font-mono
+  font-size $text-sm
+  line-height 1.65
+  background var(--code-bg)
+  border-radius $radius-md
+  border 1px solid var(--border-subtle)
+  overflow-x auto
+  margin 1.5em 0
+  position relative
+
+  code
+    background none
+    padding 0
+    color inherit
+    font-size inherit
+    border-radius 0
+
+// ----- 水平线 -----
+hr
+  border none
+  height 1px
+  background var(--border-subtle)
+  margin 2.5em 0
+
+// ----- 表格 -----
+table
+  width 100%
+  border-collapse collapse
+  margin 1.5em 0
+  font-size $text-sm
+
+thead
+  border-bottom 2px solid var(--border-strong)
+
+th
+  text-align left
+  font-weight 600
+  color var(--text-primary)
+  padding 0.6em 0.8em
+
+td
+  padding 0.6em 0.8em
+  border-bottom 1px solid var(--border-subtle)
+  color var(--text-secondary)
+
+tbody tr:hover
+  background var(--bg-overlay)
+
+// ----- 缩略语 -----
+abbr[title]
+  text-decoration underline dotted
+  cursor help
+
+// ----- 删除线 -----
+del, s
+  color var(--text-muted)
+
+// ----- 标记 / 高亮 -----
+mark
+  background rgba(124, 92, 255, 0.20)
+  color var(--text-primary)
+  padding 0.1em 0.3em
+  border-radius 3px
+
+// ----- 脚注 -----
+sup, sub
+  font-size 0.75em
+  line-height 0
+  position relative
+  vertical-align baseline
+
+sup
+  top -0.5em
+
+sub
+  bottom -0.25em
+
+// ----- 图片说明 -----
+img + em
+  display block
+  text-align center
+  font-size $text-sm
+  color var(--text-muted)
+  margin-top 0.5em
+
+// ----- 正文容器 (Prose) -----
+.prose
+  max-width $prose-max-width
+  margin 0 auto

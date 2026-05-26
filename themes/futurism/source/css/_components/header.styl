@@ -1,0 +1,126 @@
+// ============================================
+//  Header — 导航栏
+//  占位: Step 4 填充
+// ============================================
+
+.site-header
+  position fixed
+  top 0
+  left 0
+  right 0
+  z-index $z-header
+  height 64px
+  display flex
+  align-items center
+  background var(--overlay-bg)
+  backdrop-filter blur(16px)
+  -webkit-backdrop-filter blur(16px)
+  border-bottom 1px solid var(--border-subtle)
+  transition background $transition-slow, border-color $transition-slow
+
+  .header-inner
+    display flex
+    align-items center
+    justify-content space-between
+    width 100%
+    max-width $container-max-width
+    margin 0 auto
+    padding 0 $space-lg
+
+  // 站点名称
+  .site-title
+    font-family $font-display
+    font-size $text-lg
+    font-weight 700
+    color var(--brand-accent)
+    text-shadow 0 0 12px rgba(0, 229, 255, 0.4)
+    white-space nowrap
+
+  // 导航链接
+  .nav-links
+    display flex
+    align-items center
+    gap $space-lg
+    list-style none
+    padding 0
+    margin 0
+
+    a
+      font-size $text-sm
+      font-weight 500
+      color var(--text-secondary)
+      transition color $transition-fast
+      position relative
+
+      &::after
+        content ''
+        position absolute
+        bottom -4px
+        left 0
+        width 0
+        height 2px
+        background var(--brand-primary)
+        transition width $transition-base
+
+      &:hover, &.active
+        color var(--text-primary)
+
+      &:hover::after, &.active::after
+        width 100%
+
+  // 主题切换 + 搜索按钮
+  .header-actions
+    display flex
+    align-items center
+    gap $space-md
+
+    button
+      display flex
+      align-items center
+      justify-content center
+      width 36px
+      height 36px
+      border-radius $radius-sm
+      color var(--text-secondary)
+      transition color $transition-fast, background $transition-fast
+
+      &:hover
+        color var(--text-primary)
+        background var(--bg-overlay)
+
+// 移动端汉堡菜单
+.nav-toggle
+  display none
+  flex-direction column
+  gap 5px
+  padding 4px
+
+  span
+    display block
+    width 22px
+    height 2px
+    background var(--text-primary)
+    border-radius 1px
+    transition transform $transition-base, opacity $transition-base
+
+// 移动端侧滑抽屉
+@media (max-width: $bp-tablet)
+  .nav-links
+    position fixed
+    top 64px
+    right 0
+    bottom 0
+    width 280px
+    flex-direction column
+    align-items flex-start
+    padding $space-xl $space-lg
+    background var(--bg-elevated)
+    border-left 1px solid var(--border-subtle)
+    transform translateX(100%)
+    transition transform $transition-base
+
+    &.is-open
+      transform translateX(0)
+
+  .nav-toggle
+    display flex

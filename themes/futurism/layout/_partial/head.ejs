@@ -1,0 +1,84 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<!-- SEO -->
+<title><%= page.title ? page.title + ' | ' + config.title : config.title %></title>
+<meta name="description" content="<%= strip_html(page.excerpt || page.summary || theme.site.description || config.description).substring(0, 160) %>">
+<meta name="author" content="<%= config.author %>">
+<% if (theme.seo.sitemap) { %>
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+<% } %>
+
+<!-- Open Graph -->
+<meta property="og:type" content="<%= is_post() ? 'article' : 'website' %>">
+<meta property="og:title" content="<%= page.title || config.title %>">
+<meta property="og:description" content="<%= strip_html(page.excerpt || page.summary || theme.site.description || '').substring(0, 200) %>">
+<meta property="og:url" content="<%= url %>">
+<meta property="og:site_name" content="<%= config.title %>">
+<% if (page.cover) { %>
+<meta property="og:image" content="<%= page.cover %>">
+<% } else if (theme.seo.og_image) { %>
+<meta property="og:image" content="<%- url_for(theme.seo.og_image) %>">
+<% } %>
+
+<% if (is_post()) { %>
+<meta property="article:published_time" content="<%= date(page.date, 'YYYY-MM-DDTHH:mm:ssZ') %>">
+<% if (page.updated) { %>
+<meta property="article:modified_time" content="<%= date(page.updated, 'YYYY-MM-DDTHH:mm:ssZ') %>">
+<% } %>
+<% if (page.tags && page.tags.length) { %>
+<% page.tags.forEach(function(tag) { %>
+<meta property="article:tag" content="<%= tag.name %>">
+<% }) %>
+<% } %>
+<% } %>
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="<%= page.title || config.title %>">
+<meta name="twitter:description" content="<%= strip_html(page.excerpt || page.summary || '').substring(0, 200) %>">
+
+<!-- Canonical URL -->
+<link rel="canonical" href="<%= url %>">
+
+<!-- Favicon -->
+<link rel="icon" type="image/x-icon" href="<%- url_for('images/favicon.ico') %>">
+
+<!-- Fonts: Inter + JetBrains Mono (Google Fonts) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<% if (theme.appearance.font.cdn) { %>
+<link href="<%= theme.appearance.font.cdn %>" rel="stylesheet">
+<% } %>
+
+<!-- Geist 字体 (Vercel CDN) -->
+<% if (theme.appearance.font.geist_cdn) { %>
+<link href="<%= theme.appearance.font.geist_cdn %>" rel="stylesheet">
+<% } %>
+<% if (theme.appearance.font.geist_mono_cdn) { %>
+<link href="<%= theme.appearance.font.geist_mono_cdn %>" rel="stylesheet">
+<% } %>
+
+<!-- RSS -->
+<% if (theme.rss) { %>
+<link rel="alternate" type="application/atom+xml" title="<%= config.title %>" href="<%- url_for(theme.rss) %>">
+<% } %>
+
+<!-- 主样式 -->
+<link rel="stylesheet" href="<%- url_for('css/style.css') %>">
+
+<!-- Giscus 主题同步脚本 (提前加载) -->
+<% if (theme.comments.enable && theme.comments.provider === 'giscus') { %>
+<script>
+  // 当主题切换时, 同步更新 Giscus iframe 主题
+  window.__updateGiscusTheme = function(themeName) {
+    var iframe = document.querySelector('iframe.giscus-frame');
+    if (iframe) {
+      iframe.contentWindow.postMessage({
+        giscus: { setConfig: { theme: themeName } }
+      }, 'https://giscus.app');
+    }
+  };
+</script>
+<% } %>

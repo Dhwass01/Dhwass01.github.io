@@ -1,0 +1,62 @@
+<!-- Command Palette Modal -->
+<div id="command-palette-overlay" class="command-palette-overlay" role="dialog" aria-modal="true" aria-label="搜索命令面板">
+  <div class="command-palette">
+
+    <!-- 搜索输入 -->
+    <div class="command-palette__input-wrap">
+      <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+      </svg>
+      <input id="command-palette-input"
+             type="text"
+             placeholder="搜索文章、页面、标签…"
+             autocomplete="off"
+             spellcheck="false">
+    </div>
+
+    <!-- 搜索结果 -->
+    <div id="command-palette-results" class="command-palette__results">
+      <div class="command-palette__empty">输入关键词开始搜索</div>
+    </div>
+
+    <!-- 底部提示 -->
+    <div class="command-palette__footer">
+      <span><kbd>↑↓</kbd> 导航</span>
+      <span><kbd>↵</kbd> 打开</span>
+      <span><kbd>esc</kbd> 关闭</span>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  // 构建搜索索引数据
+  window.__searchIndex = [
+    <% site.posts.sort('date', -1).forEach(function(post) { %>
+    {
+      title: <%- JSON.stringify(post.title) %>,
+      url: '<%- url_for(post.path) %>',
+      summary: <%- JSON.stringify(post.summary || strip_html(post.excerpt || '').substring(0, 100)) %>,
+      tags: [<% if (post.tags) { post.tags.forEach(function(t, i) { %><%- JSON.stringify(t.name) %><%= i < post.tags.length - 1 ? ',' : '' %><% }) } %>],
+      categories: [<% if (post.categories) { post.categories.forEach(function(c, i) { %><%- JSON.stringify(c.name) %><%= i < post.categories.length - 1 ? ',' : '' %><% }) } %>],
+      date: '<%= date(post.date, 'YYYY-MM-DD') %>',
+      type: 'post'
+    },
+    <% }) %>
+    // 固定页面
+    <% if (theme.nav) { %>
+    <% for (var label in theme.nav) { %>
+    {
+      title: '<%- label %>',
+      url: '<%- url_for(theme.nav[label]) %>',
+      summary: '',
+      tags: [],
+      categories: [],
+      date: '',
+      type: 'page'
+    },
+    <% } %>
+    <% } %>
+  ];
+})();
+</script>

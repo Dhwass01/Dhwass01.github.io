@@ -1,0 +1,55 @@
+<article class="post-card">
+  <% if (post.cover) { %>
+    <a href="<%- url_for(post.path) %>">
+      <img class="post-card__cover"
+           src="<%- url_for(post.cover) %>"
+           alt="<%= post.title %>"
+           loading="lazy">
+    </a>
+  <% } else { %>
+    <a href="<%- url_for(post.path) %>" class="post-card__cover post-card__cover--placeholder"
+       style="background: linear-gradient(135deg, <%= stringToColor(post.title) %>22, <%= stringToColor(post.title) %>44);">
+    </a>
+  <% } %>
+
+  <div class="post-card__body">
+    <% if (post.categories && post.categories.length) { %>
+      <% post.categories.forEach(function(cat) { %>
+        <a href="<%- url_for(cat.path) %>" class="post-card__category"><%= cat.name %></a>
+      <% }) %>
+    <% } %>
+
+    <h3 class="post-card__title">
+      <a href="<%- url_for(post.path) %>"><%= post.title %></a>
+    </h3>
+
+    <% if (post.summary) { %>
+      <p class="post-card__excerpt"><%= post.summary %></p>
+    <% } else if (post.excerpt) { %>
+      <p class="post-card__excerpt"><%= strip_html(post.excerpt).substring(0, 120) %></p>
+    <% } %>
+
+    <div class="post-card__meta">
+      <time datetime="<%= date(post.date, 'YYYY-MM-DD') %>">
+        📅 <%= date(post.date, 'YYYY-MM-DD') %>
+      </time>
+      <% if (theme.post.reading_time) { %>
+        <span>⏱ <%= min2read(post.content) %> min</span>
+      <% } %>
+      <% if (post.tags && post.tags.length) { %>
+        <span>
+          🏷️ <% post.tags.forEach(function(tag, i) { %><a href="<%- url_for(tag.path) %>"><%= tag.name %></a><%= i < post.tags.length - 1 ? ', ' : '' %><% }) %>
+        </span>
+      <% } %>
+    </div>
+  </div>
+</article>
+
+<% function stringToColor(str) {
+  var hash = 0;
+  for (var i = 0; i < str.length; i++) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  var hue = Math.abs(hash) % 360;
+  return 'hsl(' + hue + ', 60%, 50%)';
+} %>

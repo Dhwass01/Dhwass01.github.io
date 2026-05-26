@@ -1,0 +1,25 @@
+<div class="taxonomy container">
+  <h1 class="taxonomy__title">
+    <span class="taxonomy__icon">#</span> 标签：<%= page.tag %>
+  </h1>
+  <p class="taxonomy__count">共 <%= page.posts.length %> 篇</p>
+
+  <div class="post-grid">
+    <% page.posts.sort('date', -1).forEach(function(post) { %>
+      <%- partial('_partial/post-card', { post: post }) %>
+    <% }) %>
+  </div>
+
+  <!-- 所有标签 -->
+  <section class="taxonomy-all">
+    <h2 class="section-title">所有标签</h2>
+    <div class="tag-cloud">
+      <% site.tags.sort('name').forEach(function(tag) { %>
+        <a href="<%- url_for(tag.path) %>"
+           class="tag-chip <%= tag.name === page.tag ? 'tag-chip--active' : '' %>">
+          #<%= tag.name %> <span class="tag-count"><%= tag.length %></span>
+        </a>
+      <% }) %>
+    </div>
+  </section>
+</div>

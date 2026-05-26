@@ -1,0 +1,80 @@
+<header id="header" class="site-header">
+  <div class="header-inner">
+
+    <!-- 站点标题 -->
+    <a href="<%- url_for('/') %>" class="site-title">
+      <% if (theme.site.logo) { %>
+        <img src="<%- url_for(theme.site.logo) %>" alt="<%= config.title %>" height="28">
+      <% } else { %>
+        <span class="text-gradient"><%= theme.site.title || config.title %></span>
+      <% } %>
+    </a>
+
+    <!-- 桌面端导航 -->
+    <nav class="nav-links" id="navLinks" aria-label="主导航">
+      <% for (var label in theme.nav) { %>
+        <a href="<%- url_for(theme.nav[label]) %>"
+           class="<%= is_current(theme.nav[label]) ? 'active' : '' %>">
+          <%= label %>
+        </a>
+      <% } %>
+    </nav>
+
+    <!-- 操作区 -->
+    <div class="header-actions">
+      <!-- 搜索触发 -->
+      <% if (theme.search.enable && theme.command_palette.enable) { %>
+      <button id="search-trigger"
+              aria-label="搜索"
+              title="搜索 (<%= theme.command_palette.shortcut %>)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+        </svg>
+      </button>
+      <% } %>
+
+      <!-- 主题切换 -->
+      <button id="theme-toggle"
+              aria-label="切换主题"
+              title="切换深色/浅色模式">
+        <!-- 暗色模式显示太阳 (切到亮色) -->
+        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <!-- 亮色模式显示月亮 (切到暗色) -->
+        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+
+      <!-- 移动端汉堡菜单 -->
+      <button class="nav-toggle" id="navToggle" aria-label="菜单" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<script>
+(function() {
+  // 移动端导航切换
+  var toggle = document.getElementById('navToggle');
+  var nav = document.getElementById('navLinks');
+  if (toggle && nav) {
+    toggle.addEventListener('click', function() {
+      var isOpen = nav.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', isOpen);
+    });
+    // 点击导航链接后自动关闭
+    nav.addEventListener('click', function(e) {
+      if (e.target.tagName === 'A') {
+        nav.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+})();
+</script>
