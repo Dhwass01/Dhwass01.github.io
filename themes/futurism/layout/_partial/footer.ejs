@@ -18,17 +18,17 @@
 
     <!-- 版权 + 信息 -->
     <div class="footer-meta">
-      <% if (theme.footer.copyright) { %>
+      <% if (theme.footer && theme.footer.copyright) { %>
       <span class="footer-copyright"><%= theme.footer.copyright %></span>
       <% } %>
 
-      <% if (theme.footer.powered_by) { %>
+      <% if (theme.footer && theme.footer.powered_by) { %>
       <span class="footer-powered">
         Powered by <a href="https://hexo.io/" target="_blank" rel="noopener noreferrer">Hexo</a>
       </span>
       <% } %>
 
-      <% if (theme.footer.theme_credit) { %>
+      <% if (theme.footer && theme.footer.theme_credit) { %>
       <span class="footer-theme">
         Theme: <a href="#">Futurism</a>
       </span>

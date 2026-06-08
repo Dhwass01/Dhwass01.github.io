@@ -18,6 +18,19 @@
     <!-- 文章主体 -->
     <div class="post-body">
 
+      <!-- 面包屑导航 -->
+      <nav class="breadcrumb" aria-label="面包屑导航">
+        <a href="<%- url_for('/') %>">首页</a>
+        <span class="breadcrumb__sep">›</span>
+        <% if (page.categories && page.categories.length) { %>
+          <% page.categories.forEach(function(cat, i) { %>
+            <a href="<%- url_for(cat.path) %>"><%= cat.name %></a>
+            <span class="breadcrumb__sep">›</span>
+          <% }) %>
+        <% } %>
+        <span class="breadcrumb__current"><%= page.title %></span>
+      </nav>
+
       <!-- 文章头部 -->
       <header class="post-header">
         <h1 class="post-header__title"><%= page.title %></h1>
@@ -67,6 +80,24 @@
         <% }) %>
       </div>
       <% } %>
+
+      <!-- 分享按钮 -->
+      <div class="post-share">
+        <span class="post-share__label">分享文章：</span>
+        <button class="post-share__btn post-share__btn--copy" onclick="copyLink()" title="复制链接">
+          🔗 复制链接
+        </button>
+        <a class="post-share__btn post-share__btn--twitter"
+           href="https://twitter.com/intent/tweet?text=<%= encodeURIComponent(page.title) %>&url=<%= encodeURIComponent(page.permalink) %>"
+           target="_blank" rel="noopener noreferrer" title="分享到 Twitter">
+          🐦 Twitter
+        </a>
+        <a class="post-share__btn post-share__btn--weibo"
+           href="https://service.weibo.com/share/share.php?title=<%= encodeURIComponent(page.title) %>&url=<%= encodeURIComponent(page.permalink) %>"
+           target="_blank" rel="noopener noreferrer" title="分享到微博">
+          📢 微博
+        </a>
+      </div>
 
       <!-- 相关文章推荐 -->
       <%
@@ -159,4 +190,57 @@
 
     </div>
   </div>
+
+  <!-- 移动端 TOC 抽屉 -->
+  <% if (theme.post.toc && toc(page.content).length > 0) { %>
+  <button class="toc-mobile-trigger" id="tocMobileTrigger" aria-label="文章目录" title="文章目录">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="15" y2="12"/><line x1="3" y1="18" x2="18" y2="18"/>
+    </svg>
+  </button>
+  <div class="toc-drawer-overlay" id="tocDrawerOverlay">
+    <div class="toc-drawer" id="tocDrawer">
+      <div class="toc-drawer__header">
+        <span class="toc-drawer__title">目录</span>
+        <button class="toc-drawer__close" id="tocDrawerClose" aria-label="关闭目录">&times;</button>
+      </div>
+      <div class="toc-drawer__content">
+        <%- toc(page.content, { list_number: false, max_depth: theme.post.toc_depth || 3 }) %>
+      </div>
+    </div>
+  </div>
+  <script>
+  (function() {
+    var trigger = document.getElementById('tocMobileTrigger');
+    var overlay = document.getElementById('tocDrawerOverlay');
+    var drawer = document.getElementById('tocDrawer');
+    var closeBtn = document.getElementById('tocDrawerClose');
+    if (!trigger || !overlay) return;
+
+    function openDrawer() {
+      overlay.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeDrawer() {
+      overlay.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    trigger.addEventListener('click', openDrawer);
+    closeBtn && closeBtn.addEventListener('click', closeDrawer);
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) closeDrawer();
+    });
+    drawer && drawer.addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeDrawer();
+    });
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 1024 && overlay.classList.contains('is-open')) closeDrawer();
+    });
+  })();
+  </script>
+  <% } %>
 </article>

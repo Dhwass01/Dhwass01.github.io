@@ -33,7 +33,7 @@
       <time datetime="<%= date(post.date, 'YYYY-MM-DD') %>">
         📅 <%= date(post.date, 'YYYY-MM-DD') %>
       </time>
-      <% if (theme.post.reading_time) { %>
+      <% if (theme.post && theme.post.reading_time) { %>
         <span>⏱ <%= min2read(post.content) %> min</span>
       <% } %>
       <% if (post.tags && post.tags.length) { %>

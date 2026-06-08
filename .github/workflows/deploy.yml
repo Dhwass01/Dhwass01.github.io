@@ -30,6 +30,9 @@ jobs:
       - name: Build Hexo site
         run: npx hexo generate
 
+      - name: Build search index
+        run: npx pagefind --site public
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:

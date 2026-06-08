@@ -86,3 +86,56 @@
 
   .toc-mobile-trigger
     display flex
+
+  .toc-drawer-overlay
+    position fixed
+    inset 0
+    z-index $z-modal
+    background var(--overlay-bg)
+    backdrop-filter blur(8px)
+    -webkit-backdrop-filter blur(8px)
+    display none
+
+    &.is-open
+      display flex
+      justify-content flex-end
+
+  .toc-drawer
+    width 280px
+    max-width 80vw
+    height 100%
+    background var(--bg-elevated)
+    border-left 1px solid var(--border-subtle)
+    display flex
+    flex-direction column
+    overflow hidden
+
+  .toc-drawer__header
+    display flex
+    align-items center
+    justify-content space-between
+    padding $space-md $space-lg
+    border-bottom 1px solid var(--border-subtle)
+    flex-shrink 0
+
+  .toc-drawer__title
+    font-family $font-display
+    font-size $text-sm
+    font-weight 600
+    color var(--text-muted)
+    text-transform uppercase
+    letter-spacing 0.08em
+
+  .toc-drawer__close
+    font-size 1.5rem
+    color var(--text-muted)
+    line-height 1
+    padding 0
+
+    &:hover
+      color var(--text-primary)
+
+  .toc-drawer__content
+    flex 1
+    overflow-y auto
+    padding $space-lg

@@ -1,0 +1,50 @@
+// ============================================
+//  文章分享按钮
+// ============================================
+
+.post-share
+  display flex
+  align-items center
+  flex-wrap wrap
+  gap $space-sm
+  margin-top $space-xl
+  padding-top $space-lg
+  border-top 1px solid var(--border-subtle)
+
+  &__label
+    font-size $text-sm
+    color var(--text-muted)
+    font-weight 500
+
+  &__btn
+    display inline-flex
+    align-items center
+    gap 0.3em
+    padding 0.4em 0.8em
+    font-size $text-sm
+    color var(--text-secondary)
+    background var(--bg-elevated)
+    border 1px solid var(--border-subtle)
+    border-radius $radius-sm
+    cursor pointer
+    text-decoration none
+    transition all 0.2s
+
+    &:hover
+      color var(--text-primary)
+      border-color var(--brand-primary)
+      box-shadow var(--glow-primary)
+      transform translateY(-1px)
+
+    &--copy
+      &.copied
+        color var(--brand-accent)
+        border-color var(--brand-accent)
+
+    &--twitter:hover
+      border-color #1DA1F2
+      color #1DA1F2
+
+    &--weibo:hover
+      border-color #E6162D
+      color #E6162D

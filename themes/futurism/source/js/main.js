@@ -5,10 +5,9 @@
 (function () {
   "use strict";
 
-  // 代码块复制功能 + 语言标签
-  function initCodeCopy() {
+  // 代码块：语言标签 + 复制按钮
+  function initCodeBlocks() {
     document.querySelectorAll("pre").forEach(function (pre) {
-      // 包裹容器
       var wrapper = document.createElement("div");
       wrapper.className = "code-block-wrapper";
       pre.parentNode.insertBefore(wrapper, pre);
@@ -33,22 +32,19 @@
       btn.addEventListener("click", function () {
         var code = pre.querySelector("code");
         var text = code ? code.textContent : pre.textContent;
-        navigator.clipboard
-          .writeText(text)
-          .then(function () {
-            btn.textContent = "✓ 已复制";
-            btn.classList.add("copied");
-            setTimeout(function () {
-              btn.textContent = "复制";
-              btn.classList.remove("copied");
-            }, 2000);
-          })
-          .catch(function () {
-            btn.textContent = "失败";
-            setTimeout(function () {
-              btn.textContent = "复制";
-            }, 2000);
-          });
+        navigator.clipboard.writeText(text).then(function () {
+          btn.textContent = "✓ 已复制";
+          btn.classList.add("copied");
+          setTimeout(function () {
+            btn.textContent = "复制";
+            btn.classList.remove("copied");
+          }, 2000);
+        }).catch(function () {
+          btn.textContent = "失败";
+          setTimeout(function () {
+            btn.textContent = "复制";
+          }, 2000);
+        });
       });
     });
   }
@@ -71,7 +67,41 @@
   }
 
   function ready() {
-    initCodeCopy();
+    initCodeBlocks();
     initExternalLinks();
   }
 })();
+
+// 分享功能：复制链接
+function copyLink() {
+  var url = window.location.href;
+  navigator.clipboard.writeText(url).then(function () {
+    var btn = document.querySelector(".post-share__btn--copy");
+    if (btn) {
+      var originalText = btn.innerHTML;
+      btn.innerHTML = "✅ 已复制";
+      btn.classList.add("copied");
+      setTimeout(function () {
+        btn.innerHTML = originalText;
+        btn.classList.remove("copied");
+      }, 2000);
+    }
+  }).catch(function () {
+    // 降级方案
+    var input = document.createElement("input");
+    input.value = url;
+    document.body.appendChild(input);
+    input.select();
+    document.execCommand("copy");
+    document.body.removeChild(input);
+    var btn = document.querySelector(".post-share__btn--copy");
+    if (btn) {
+      btn.innerHTML = "✅ 已复制";
+      btn.classList.add("copied");
+      setTimeout(function () {
+        btn.innerHTML = "🔗 复制链接";
+        btn.classList.remove("copied");
+      }, 2000);
+    }
+  });
+}

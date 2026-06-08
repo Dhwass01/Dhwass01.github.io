@@ -3,10 +3,10 @@
 
     <!-- 站点标题 -->
     <a href="<%- url_for('/') %>" class="site-title">
-      <% if (theme.site.logo) { %>
+      <% if (theme.site && theme.site.logo) { %>
         <img src="<%- url_for(theme.site.logo) %>" alt="<%= config.title %>" height="28">
       <% } else { %>
-        <span class="text-gradient"><%= theme.site.title || config.title %></span>
+        <span class="text-gradient"><%= (theme.site && theme.site.title) || config.title %></span>
       <% } %>
     </a>
 
@@ -23,10 +23,10 @@
     <!-- 操作区 -->
     <div class="header-actions">
       <!-- 搜索触发 -->
-      <% if (theme.search.enable && theme.command_palette.enable) { %>
+      <% if (theme.search && theme.search.enable && theme.command_palette && theme.command_palette.enable) { %>
       <button id="search-trigger"
               aria-label="搜索"
-              title="搜索 (<%= theme.command_palette.shortcut %>)">
+              title="搜索 (<%= theme.command_palette.shortcut || 'Ctrl+K' %>)">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
         </svg>

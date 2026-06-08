@@ -1,0 +1,32 @@
+/* 面包屑导航 */
+.breadcrumb
+  display flex
+  align-items center
+  flex-wrap wrap
+  gap 0.3em
+  font-size $text-sm
+  color var(--text-muted)
+  margin-bottom $space-lg
+  padding-bottom $space-sm
+  border-bottom 1px solid var(--border-subtle)
+
+  a
+    color var(--text-secondary)
+    text-decoration none
+    transition color 0.2s
+
+    &:hover
+      color var(--brand-accent)
+
+  &__sep
+    color var(--text-muted)
+    opacity 0.5
+    user-select none
+
+  &__current
+    color var(--text-primary)
+    font-weight 500
+    overflow hidden
+    text-overflow ellipsis
+    white-space nowrap
+    max-width 300px

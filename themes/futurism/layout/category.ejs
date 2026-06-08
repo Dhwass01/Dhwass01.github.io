@@ -1,4 +1,12 @@
 <div class="taxonomy container">
+  <nav class="breadcrumb" aria-label="面包屑导航">
+    <a href="<%- url_for('/') %>">首页</a>
+    <span class="breadcrumb__sep">›</span>
+    <a href="<%- url_for('/categories') %>">分类</a>
+    <span class="breadcrumb__sep">›</span>
+    <span class="breadcrumb__current"><%= page.category %></span>
+  </nav>
+
   <h1 class="taxonomy__title">
     <span class="taxonomy__icon">📂</span> 分类：<%= page.category %>
   </h1>

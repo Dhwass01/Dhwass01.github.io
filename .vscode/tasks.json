@@ -2,7 +2,7 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"label": "Hexo Build",
+			"label": "Hexo Clean & Build",
 			"type": "shell",
 			"command": "npx hexo clean && npx hexo generate",
 			"problemMatcher": [],
@@ -16,15 +16,21 @@
 			"group": "build"
 		},
 		{
-			"label": "Hexo Generate",
+			"label": "Hexo Server",
 			"type": "shell",
-			"command": "npx hexo generate",
+			"command": "npx hexo server",
 			"problemMatcher": []
 		},
 		{
-			"label": "Rebuild Hexo",
+			"label": "Pagefind Index",
 			"type": "shell",
-			"command": "npx hexo clean && npx hexo generate",
+			"command": "npx pagefind --site public",
+			"problemMatcher": []
+		},
+		{
+			"label": "Install Dependencies",
+			"type": "shell",
+			"command": "npm install",
 			"problemMatcher": []
 		}
 	]

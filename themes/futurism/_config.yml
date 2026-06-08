@@ -5,14 +5,15 @@
 # ---------- 站点信息 ----------
 site:
   logo: "" # Logo 图片路径，留空则显示文字
-  title: "Futurism" # 导航栏站点名称
+  title: "Dhwass01" # 导航栏站点名称
   subtitle: "构建 × 创造 × 探索" # Hero 区副标题
-  description: "技术与设计的交汇点" # SEO meta description
+  description: "一个热爱技术与设计的开发者博客" # SEO meta description
 
 # ---------- 导航菜单 ----------
 nav:
   Home: /
   Archives: /archives
+  Categories: /categories
   Tags: /tags
   About: /about
   Projects: /projects
@@ -55,6 +56,18 @@ prism:
   line_number: true
   copy_button: true # 一键复制
   filename_label: true # 文件名标签
+
+# ---------- 页脚 ----------
+footer:
+  copyright: "© 2024-2026 Dhwass01"
+  powered_by: true
+  theme_credit: true
+
+# ---------- 回到顶部 ----------
+back_to_top: true
+
+# ---------- 文章分页 ----------
+post_pagination: true
 
 # ---------- 评论 (Giscus) ----------
 comments:
@@ -102,13 +115,3 @@ appearance:
 command_palette:
   enable: true
   shortcut: "mod+k" # Cmd+K / Ctrl+K
-
-# ---------- 页脚 ----------
-footer:
-  copyright: "© 2026 Dhwass01"
-  powered_by: true # "Powered by Hexo"
-  theme_credit: true # "Theme: Futurism"
-
-# ---------- 页面底部 ----------
-post_pagination: true # 上一篇 / 下一篇
-back_to_top: true # 回到顶部按钮

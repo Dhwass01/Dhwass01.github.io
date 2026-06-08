@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="<%= config.language || 'zh-CN' %>" data-theme="<%= theme.appearance.default_theme || 'dark' %>">
+<html lang="<%= config.language || 'zh-CN' %>" data-theme="<%= (theme.appearance && theme.appearance.default_theme) || 'dark' %>">
 <head>
   <%- partial('_partial/head') %>
 </head>
 <body>
+  <!-- 跳过导航链接 -->
+  <a href="#content" class="skip-link">跳到内容</a>
+
   <%- partial('_partial/header') %>
 
   <!-- 命令面板 -->
@@ -26,7 +29,7 @@
   <script src="<%- url_for('js/command-palette.js') %>"></script>
   <% } %>
   <!-- TOC + 阅读进度 (仅文章页) -->
-  <% if (is_post() && theme.post.toc) { %>
+  <% if (is_post() && theme.post && theme.post.toc) { %>
   <script src="<%- url_for('js/toc-progress.js') %>"></script>
   <% } %>
 </body>

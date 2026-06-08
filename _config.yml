@@ -3,10 +3,15 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo Speed Up
-subtitle: ""
-description: ""
+title: Dhwass01's Blog
+subtitle: "构建 × 创造 × 探索"
+description: "一个热爱技术与设计的开发者博客，记录前端开发、Hexo 主题开发、工具效率与设计思考。"
 keywords:
+  - 前端开发
+  - Hexo
+  - 博客
+  - 技术笔记
+  - Web 开发
 author: Dhwass01
 language: zh-CN
 timezone: Asia/Shanghai
@@ -42,7 +47,7 @@ filename_case: 0
 render_drafts: false
 post_asset_folder: false
 relative_link: false
-future: true
+future: false
 syntax_highlighter: prism
 highlight:
   line_number: true
@@ -97,6 +102,26 @@ ignore:
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: futurism
+
+# Sitemap
+sitemap:
+  path: sitemap.xml
+  rel: false
+
+# RSS Feed
+feed:
+  enable: true
+  type: atom
+  path: atom.xml
+  limit: 20
+  hub:
+  content:
+  content_limit: 140
+  content_limit_delim: ' '
+  order_by: -date
+  icon: icon.png
+  autodiscovery: true
+  template:
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
